@@ -40,7 +40,8 @@ jobs:
           path: ~/tmp/artifacts
           destination: prefix
       - store_test_results:
-          path: ~/tmp/artifacts/test-results
+          path: test-results
+
 
   deploy-development:
     docker:
