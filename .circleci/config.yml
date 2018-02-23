@@ -50,7 +50,10 @@ jobs:
       - run:
           name: Install dependencies
           working_directory: /
-          command: pip install awsebcli --upgrade --user
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python-pip python-dev build-essential
+            sudo pip install awsebcli --upgrade
       - run:
           name: Deploy 
           working_directory: ~/tmp/artifacts
