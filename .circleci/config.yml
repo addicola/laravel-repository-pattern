@@ -35,3 +35,12 @@ jobs:
         
       # run tests!
       - run: ./vendor/bin/phpunit
+      
+  deploy-prod:
+    docker:
+      - image: ubuntu:14.04
+    working_directory: /tmp/my-project  
+    steps:
+      - run:
+          name: Deploy if tests pass and branch is Master
+          command: ansible-playbook site.yml -i production
