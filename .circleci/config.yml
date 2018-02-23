@@ -36,7 +36,7 @@ jobs:
       # run tests!
       - run: ./vendor/bin/phpunit
 
-  deploy-prod:
+  deploy-development:
     docker:
       - image: circleci/python:2.7-jessie-browsers
     working_directory: /tmp/my-project  
@@ -48,9 +48,9 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy-prod:
+      - deploy-development:
           requires:
             - build
           filters:
             branches:
-              only: master  
+              only: development  
