@@ -44,7 +44,7 @@ jobs:
 
   deploy-development:
     docker:
-      - image: circleci/python:3-stretch-browsers
+      - image: circleci/python:2-stretch-browsers
     working_directory: /tmp/project  
     steps:
       - run:
