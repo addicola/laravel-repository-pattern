@@ -36,6 +36,12 @@ jobs:
       # run tests!
       - run: ./vendor/bin/phpunit
 
+      - store_artifacts:
+          path: ~/tmp/artifacts
+          destination: prefix
+      - store_test_results:
+          path: ~/tmp/artifacts/test-results
+
   deploy-development:
     docker:
       - image: circleci/python:2-stretch-browsers
