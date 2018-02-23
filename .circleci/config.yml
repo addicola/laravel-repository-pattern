@@ -38,17 +38,13 @@ jobs:
 
   deploy-development:
     docker:
-      - image: circleci/python:2.7-jessie-browsers
+      - image: circleci/python:3-stretch-browsers
     working_directory: /tmp/my-project  
     steps:
       - run:
           name: Install dependencies
           working_directory: /
           command: |
-            apt-get -y -qq update
-            apt-get -y -qq install python3.4-dev
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python3.4 get-pip.py --user
             pip install awscli --upgrade --user
 
 workflows:
