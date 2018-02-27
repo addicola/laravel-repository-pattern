@@ -18,8 +18,12 @@ box: debian
 build:
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
-    # http://devcenter.wercker.com/docs/steps/index.html
+    # http://devcenter.wercker.com/docs/steps/index.html    
   steps:
+    - edgecaseadmin/install-aws-cli:
+        key: $AWS_KEY
+        secret: $AWS_SECRET
+        region: $AWS_REGION
     - script:
         name: echo
         code: |
