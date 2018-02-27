@@ -36,23 +36,38 @@ jobs:
       # run tests!
       - run: ./vendor/bin/phpunit
 
-  deploy-prod:
+      - store_artifacts:
+          path: ~/tmp/artifacts
+          destination: prefix
+      - store_test_results:
+          path: test-results
+
+
+  deploy-development:
     docker:
-      - image: circleci/python:2.7-jessie-browsers
-    working_directory: /tmp/my-project  
+      - image: circleci/python:2-stretch-browsers
+    working_directory: /tmp/project  
     steps:
       - run:
-          name: Deploy if tests pass and branch is Master
-          command: ls
+          name: Install dependencies
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python-pip python-dev build-essential
+            sudo pip install awsebcli --upgrade
+      - run:
+          name: Deploy 
+          command: eb list
+            
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-      - deploy-prod:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master  
+      # - deploy-development:
+      #     requires:
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: development  
