@@ -22,19 +22,22 @@ build:
     - install-packages:
         packages: git
     - script:
-        name: install phpunit
-        code: |-
-          curl -L https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit
-          chmod +x /usr/local/bin/phpunit
-    - script:
         name: install composer
         code: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
     - script:
         name: install dependencies
         code: composer install --no-interaction
-    - script:
-        name: Serve application
-        code: php -S localhost:8080 >> /dev/null &
-    - script:
+    
+test:
+    step:
+      - install-packages:
+        packages: git
+      - script:
+        name: install phpunit
+        code: |-
+          curl -L https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit
+          chmod +x /usr/local/bin/phpunit
+      - script:
         name: PHPUnit integration tests
         code: phpunit --configuration phpunit.xml
+        
